@@ -1,0 +1,4 @@
+
+1.
+Is excpetion class defined internal in the class usable only inside the class.
+

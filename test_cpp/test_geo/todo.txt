@@ -1,0 +1,28 @@
+
+1.
+At GeoGroup:
+
+Write GeoGroup into file, with all stored objects.
+
+Read GeoGroup from file, with all stored objects.
+In Constructor ?
+
+Exceptions, maybe with [] operator, or file rw.
+
+Operators: 
+[] - access to the store object by index.
++= - add object.
+
+
+2.
+At GeoObj:
+
+== - compare objects.
+!= - compare objects. 
+
+
+3.
+At GeoObj make a static member which support object id.
+Also static function for read the object id.
+ 
+
