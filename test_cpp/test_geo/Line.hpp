@@ -19,7 +19,7 @@ public:
 	virtual ~Line() { if (objCnt > 0) objCnt-- ; };
 
 	void draw();
-    int area();
+	int getObjArea() const;
 
     int getBeginX() const;
     int getBeginY() const;

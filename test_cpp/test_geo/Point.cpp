@@ -14,6 +14,7 @@ Point::Point(const Point& obj)
 {
 	if (this != &obj)
 	{
+		objID = ++objCnt;
 		xy_ref = obj.xy_ref;
 		obj_area = obj.obj_area;
 	}
@@ -30,14 +31,14 @@ void Point::draw()
 }
 
 
-int Point::area()
+int Point::getObjArea() const
 {
-    std::cout << "Point area() function. Area = " << obj_area << std::endl;
     return obj_area;
 }
 
 
 int Point::getRef_X() const { return xy_ref.x; }
+//int Point::getRef_X() { return xy_ref.x; }
 
 int Point::getRef_Y() const { return xy_ref.y; }
 
@@ -57,7 +58,8 @@ Point& Point::operator=(const Point& obj)
 
 
 // Note:
-// Because parameter is const defined, the funtctions getBegin* has to be const as well.
+// Because parameter is const defined, the functions has to be const as well (?)
+// as well.
 std::ostream& operator<<(std::ostream& os, const Geo::Point& obj)
 {
     os << "Description: Class Point object." << std::endl;
@@ -66,7 +68,7 @@ std::ostream& operator<<(std::ostream& os, const Geo::Point& obj)
     os << "Description: Coordinates: " << std::endl;
     os << "Description: Ref X: " << obj.getRef_X() << std::endl;
     os << "Description: Ref Y: " << obj.getRef_Y() << std::endl;
-    os << "Description: Area: " << obj.obj_area << std::endl;    //todo: area is public here, and should be private
+    os << "Description: Area: " << obj.getObjArea() << std::endl;
 
 	return os;
 }

@@ -18,7 +18,7 @@ public:
 	virtual ~Rectangle() { if (objCnt > 0) objCnt-- ; };
 
 	void draw();
-    int area();
+	int getObjArea() const;
 
     int getRef_X() const ;
     int getRef_Y() const ;

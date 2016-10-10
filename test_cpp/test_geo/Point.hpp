@@ -2,8 +2,7 @@
  * Point.hpp
  */
 
-// todo
-// 1. The access to xy_ref at GeoObj should be not possible for Point user.
+// todo: The access to xy_ref at GeoObj should be not possible for Point user.
 
 #ifndef POINT_HPP_
 #define POINT_HPP_
@@ -22,7 +21,7 @@ public:
 	virtual ~Point() { if (objCnt > 0) objCnt-- ; };
 
 	void draw();
-    int area();
+	int getObjArea() const;
 
     int getRef_X() const;  //todo why const. [A] because << operator in the other place is const
     int getRef_Y() const;

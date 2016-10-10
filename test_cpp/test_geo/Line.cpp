@@ -17,12 +17,13 @@ Line::Line(const Line& obj)
 {
 	if( this != &obj )
 	{
+		objID = ++objCnt;
 		xy_ref = obj.xy_ref;
 		end = obj.end;
 		obj_area = obj.obj_area;
 	}
-
 }
+
 
 void Line::draw()
 {
@@ -36,10 +37,8 @@ void Line::draw()
 }
 
 
-
-int Line::area()
+int Line::getObjArea() const
 {
-    std::cout << "Line area() function. Area = " << obj_area << std::endl;
     return obj_area;
 }
 
@@ -70,7 +69,7 @@ Line& Line::operator=(const Line& obj)
 
 
 // Note:
-// Because parameter is const defined, the funtctions getBegin* has to be const as well.
+// Because parameter is const defined, the functions has to be const as well (?)
 std::ostream& operator<<(std::ostream& os, const Geo::Line& obj)
 {
     os << "Description: Class Line object." << std::endl;
@@ -81,7 +80,7 @@ std::ostream& operator<<(std::ostream& os, const Geo::Line& obj)
     os << "Description: begin Y: " << obj.getBeginY() << std::endl;
     os << "Description: end X: " << obj.getEndX() << std::endl;
     os << "Description: end Y: " << obj.getEndY() << std::endl;
-    os << "Description: Area: " << obj.obj_area << std::endl;  //todo: area is public here, and should be private
+    os << "Description: Area: " << obj.getObjArea() << std::endl;
 
 	return os;
 }

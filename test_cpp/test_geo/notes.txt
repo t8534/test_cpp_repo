@@ -1,4 +1,58 @@
 
+###############################################################################
+Q
+###############################################################################
+
 1.
 Is excpetion class defined internal in the class usable only inside the class.
 
+2.
+How to define kind of "virtual members".
+As with virtual functions, to create interface with the members we want
+to exist in the inherited classes. Is it sense ? Because only methods play 
+interface roles.
+
+3.
+Check what is a solution.
+If there is base class member declared as protected.
+Than child class is inherited by public from the base.
+In the child copy Constructor we have no access to this member.
+
+4.
+The operator << require const parameter.
+If so, each function called inside of << implementation, must be declared
+as const. How to pass it ?
+
+
+###############################################################################
+N
+###############################################################################
+
+2.
+Not possible to initialize public members of base class in the child class Constructor.
+Check it again.
+
+3.
+Definition of the static member must be in cpp file. See GeoObj.cpp
+
+4.
+The place where operator is implemented depend on the expectations.
+If operator is implemented inside of the class, the first argument is always "this".
+If outside, the first parameter can be defined any.
+For example >> should be defined outside because the first argument must be iostream.
+But = can be inside of the class, if we assign always to the class for which we
+call operator.
+
+5.
+If the virtual function is const, than any iterator inside should be const as well.
+
+int GeoGroup::getObjArea() const
+{
+    int area_sum = 0;
+    for( std::vector<GeoObj*>::const_iterator iter = vect_geobj.begin(); iter != vect_geobj.end(); ++iter )
+    {
+        area_sum += (*iter)->obj_area;  //todo replace with the function
+    }
+    return area_sum;
+}
+ 

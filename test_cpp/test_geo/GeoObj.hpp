@@ -1,8 +1,7 @@
 /*
- * GeoObj.hpp\
+ * GeoObj.hpp
  *
  */
-
 
 #ifndef GEOOBJ_HPP_
 #define GEOOBJ_HPP_
@@ -21,16 +20,19 @@ public:
 	virtual ~GeoObj() {};
 
 	virtual void draw() = 0;
-    virtual int area() = 0;
+    virtual int getObjArea() const = 0;
 
     static int getObjCnt() { return objCnt; };
 
     // The starting point to draw the shape.
-    // With the Circle this is center of circle.
+    // With the Circle this is center of the circle.
     Coords xy_ref;
 
-    int obj_area;
     static int objCnt;
+
+//protected:	//todo: if protected no access in copy Constructor child
+public:
+    int obj_area;
 
 };
 

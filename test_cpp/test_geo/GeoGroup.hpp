@@ -24,7 +24,7 @@ public:
 	virtual ~GeoGroup();  //todo: what about if writing the file throw exception.
 
 	void draw();
-    int area();
+	int getObjArea() const;
 
     void addGeoObj(GeoObj& obj);
     void removeGeoObj(GeoObj& obj);
@@ -64,7 +64,7 @@ private:
 
 } /* namespace Geo */
 
-//todo
+//todo: The operator << implementation.
 std::ostream& operator<<(std::ostream& os, const Geo::GeoGroup& obj);
 
 #endif /* GEOGROUP_HPP_ */

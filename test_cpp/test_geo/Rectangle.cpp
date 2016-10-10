@@ -10,6 +10,7 @@ Rectangle::Rectangle(const Rectangle& obj)
 {
 	if (this != &obj)
 	{
+		objID = ++objCnt;
 		xy_ref = obj.xy_ref;
 		obj_area = obj.obj_area;
 		width = obj.width;
@@ -30,10 +31,8 @@ void Rectangle::draw()
 }
 
 
-
-int Rectangle::area()
+int Rectangle::getObjArea() const
 {
-    std::cout << "Rectangle area() function. Area = " << obj_area << std::endl;
     return obj_area;
 }
 
@@ -63,7 +62,7 @@ Rectangle& Rectangle::operator=(const Rectangle& obj)
 
 
 // Note:
-// Because parameter is const defined, the funtctions getBegin* has to be const as well.
+// Because parameter is const defined, the functions has to be const as well (?)
 std::ostream& operator<<(std::ostream& os, const Geo::Rectangle& obj)
 {
     os << "Description: Class Rectangle object." << std::endl;
@@ -74,7 +73,7 @@ std::ostream& operator<<(std::ostream& os, const Geo::Rectangle& obj)
     os << "Description: Ref Y: " << obj.getRef_Y() << std::endl;
     os << "Description: Width: " << obj.getWidth() << std::endl;
     os << "Description: Height: " << obj.getHeight() << std::endl;
-    os << "Description: Area: " << obj.obj_area << std::endl;  //todo: area is public here, and should be private
+    os << "Description: Area: " << obj.getObjArea() << std::endl;
 
 	return os;
 }

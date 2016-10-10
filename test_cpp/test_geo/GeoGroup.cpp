@@ -54,13 +54,14 @@ void GeoGroup::draw()
 }
 
 // Sum of all objects area
-int GeoGroup::area()
+int GeoGroup::getObjArea() const
 {
 	int area_sum = 0;
 
-	for( std::vector<GeoObj*>::iterator iter = vect_geobj.begin(); iter != vect_geobj.end(); ++iter )
+
+	for( std::vector<GeoObj*>::const_iterator iter = vect_geobj.begin(); iter != vect_geobj.end(); ++iter )
 	{
-		area_sum += (*iter)->obj_area;
+		area_sum += (*iter)->getObjArea();
 	}
 
 	return area_sum;
@@ -131,3 +132,5 @@ GeoGroup& GeoGroup::operator=(const GeoGroup& obj)
 }
 
 } /* namespace Geo */
+
+
