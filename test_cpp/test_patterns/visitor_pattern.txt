@@ -1,0 +1,120 @@
+- The visitor pattern is a behavioral design pattern. 
+- Visitor pattern allows to separate the data structures and the algorithms
+  to be applied on the data.
+- Both data structure objects and algorithm objects can evolve separately.
+  Makes development and changes easier.
+- Data structure (element) objects have an "accept" method which take in
+  a visitor (algorithmic) object.
+- Algorithmic objects have a "visit" method which take in a data structure object.
+
+
+#include <iostream>
+#include <list>
+using namespace std;
+
+// Forwards
+class VisitorIntf;
+
+// Abstract interface for Element objects
+class ElementIntf
+{
+public:
+    virtual string name() = 0;
+    virtual void accept(VisitorIntf* object) = 0;
+};
+
+// Abstract interface for Visitor objects
+class VisitorIntf
+{
+public:
+    virtual void visit(ElementIntf* object) = 0;
+};
+
+// Concrete element object
+class ConcreteElement1 : public ElementIntf
+{
+public:
+    string name()
+    {
+        return "ConcreteElement1";
+    }
+
+    void accept(VisitorIntf *object)
+    {
+        object->visit(this);
+    }
+};
+
+
+// Concrete element object
+class ConcreteElement2 : public ElementIntf
+{
+public:
+    string name()
+    {
+        return "ConcreteElement2";
+    }
+
+    void accept(VisitorIntf *object)
+    {
+        object->visit(this);
+    }
+};
+
+// Visitor logic 1
+class ConcreteVisitor1 : public VisitorIntf
+{
+public:
+    void visit(ElementIntf *object)
+    {
+        cout << "Visited " << object->name() <<
+                " using ConcreteVisitor1." << endl;
+    }
+};
+
+// Visitor logic 2
+class ConcreteVisitor2 : public VisitorIntf
+{
+public:
+    void visit(ElementIntf *object)
+    {
+        cout << "Visited " << object->name() <<
+             " using ConcreteVisitor2." << endl;
+    }
+};
+
+//  Test main program
+int main()
+{
+    list<ElementIntf*> elementList1;
+    elementList1.push_back(new ConcreteElement1());
+    elementList1.push_back(new ConcreteElement2());
+
+    VisitorIntf* visitor1 = new ConcreteVisitor1();
+    while ( ! elementList1.empty() )
+    {
+        ElementIntf* element = elementList1.front();
+        element->accept(visitor1);
+        elementList1.pop_front();
+    }
+
+    list<ElementIntf*> elementList2;
+    elementList2.push_back(new ConcreteElement1());
+    elementList2.push_back(new ConcreteElement2());
+    VisitorIntf* visitor2 = new ConcreteVisitor2();
+    while ( ! elementList2.empty() )
+    {
+        ElementIntf* element = elementList2.front();
+        element->accept(visitor2);
+        elementList2.pop_front();
+    }
+
+    delete visitor1;
+    delete visitor2;
+}
+OUTPUT:- 
+Visited ConcreteElement1 using ConcreteVisitor1.
+Visited ConcreteElement2 using ConcreteVisitor1.
+Visited ConcreteElement1 using ConcreteVisitor2.
+Visited ConcreteElement2 using ConcreteVisitor2.
+

@@ -1,0 +1,36 @@
+
+Start with that:
+http://stackoverflow.com/questions/17577714/setting-up-sdl2-with-eclipse-and-mingw-on-windows
+
+
+http://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/mingw/index.php
+
+http://stackoverflow.com/questions/8307091/setting-up-sdl-in-mingw
+
+https://w3.cs.jmu.edu/bernstdh/Web/common/help/cpp_mingw-sdl-setup.php
+
+#include "SDL2/SDL.h" 
+#include <stdio.h>
+
+int main( int argc, char* args[] ) 
+{ 
+  SDL_Window     *window;
+
+  SDL_Init(SDL_INIT_VIDEO);
+
+  window = SDL_CreateWindow("SDL2 Window", 100, 100, 640, 480, 0); 
+  
+  if(window==NULL)
+  {   
+    printf("Could not create window: %s\n", SDL_GetError());
+    return 1;
+  }
+  
+  SDL_Delay(3000);
+  
+  SDL_DestroyWindow(window); 
+   
+  SDL_Quit(); 
+
+  return 0;   
+}

@@ -1,0 +1,108 @@
+http://www.sourcetricks.com/2011/06/command-pattern.html#.V3T34Y38Jiw
+
+- Command pattern is a behavioral design pattern.
+- Encapsulates a command/ request. The command itself is treated as an object.
+- Classes participating in a command pattern include:
+  - Command:- An abstract interface defining the execute method.
+  - Concrete Commands:- Extend the Command interface and implements the execute method. Invokes the command on the receiver object.
+  - Receiver:- Knows how to perform the command action.
+  - Invoker:- Asks the command object to carry out the request.
+  - Client:- Creates the commands and associates with the receiver.
+- Some examples: 
+  - Used when history of requests is needed. (Stock orders executed for today)
+  - Asynchronous processing. Commands need to be executed at variant times. 
+  - Installation wizards.
+
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Command interface
+class Command
+{
+public:
+    virtual void execute() = 0;
+};
+
+// Receiver
+class StockTrade
+{
+public:
+    StockTrade() {}
+    void buy() { cout << "Buy stock" << endl; }
+    void sell() { cout << "Sell stock" << endl; }
+};
+
+// Concrete command 1
+class BuyOrder : public Command
+{
+    StockTrade* stock;
+public:
+    BuyOrder(StockTrade* stock)
+    {
+        this->stock = stock;
+    }
+
+    void execute()
+    {
+        stock->buy();
+    }
+};
+
+// Concrete command 2
+class SellOrder : public Command
+{
+    StockTrade* stock;
+public:
+    SellOrder(StockTrade* stock)
+    {
+        this->stock = stock;
+    }
+
+    void execute()
+    {
+        stock->sell();
+    }
+};
+
+// Invoker
+class StockAgent
+{
+public:
+    StockAgent() {}
+    void order( Command* command )
+    {
+        commandList.push_back(command);
+        command->execute();
+    }
+private:
+    // Looking at this command list gives
+    // this order history
+    vector<Command*> commandList;
+};
+
+// Test program
+int main()
+{
+    StockTrade* stock = new StockTrade();
+    BuyOrder* buy1 = new BuyOrder(stock);
+    BuyOrder* buy2 = new BuyOrder(stock);
+    SellOrder* sell1 = new SellOrder(stock);
+
+    StockAgent* agent = new StockAgent();
+    agent->order(buy1);
+    agent->order(buy2);
+    agent->order(sell1);
+
+    delete agent;
+    delete sell1;
+    delete buy2;
+    delete buy1;
+    delete stock;
+}
+OUTPUT:- 
+Buy stock
+Buy stock
+Sell stock
